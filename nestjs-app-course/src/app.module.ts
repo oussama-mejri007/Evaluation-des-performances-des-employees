@@ -25,12 +25,12 @@ import { ChatMessageModule } from './chat-message/chat-message.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'rh_db',
-      synchronize: true,
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USERNAME || 'postgres',
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME || 'rh_db',
+      synchronize: process.env.NODE_ENV !== 'production',
       autoLoadEntities: true,
     }),
 
